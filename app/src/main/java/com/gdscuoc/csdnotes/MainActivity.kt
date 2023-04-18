@@ -15,6 +15,7 @@ import androidx.room.Room
 import com.gdscuoc.csdnotes.data.db.AppDatabase
 import com.gdscuoc.csdnotes.data.entities.NoteEntity
 import com.gdscuoc.csdnotes.data.repositories.NotesRepository
+import com.gdscuoc.csdnotes.ui.navigation.MainNavHost
 import com.gdscuoc.csdnotes.ui.theme.CsdNotesTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Text("Hello,World!")
+                    MainNavHost()
                 }
             }
         }
