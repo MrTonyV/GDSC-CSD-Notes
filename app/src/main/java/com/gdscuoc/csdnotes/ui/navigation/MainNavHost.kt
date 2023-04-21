@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.gdscuoc.csdnotes.ui.screens.AddNotePage
+import com.gdscuoc.csdnotes.ui.screens.NotesPage
 import com.gdscuoc.csdnotes.ui.utils.Screens
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,9 +41,10 @@ fun MainNavHost(
         NavHost(
             modifier = modifier.padding(paddingValues),
             navController = navController,
-            startDestination = Screens.AddNotePage.navRoute
+            startDestination = Screens.AllNotes.navRoute
         ) {
             composable(Screens.AllNotes.navRoute) {
+                NotesPage(navController)
                 currentScreen = Screens.AllNotes.name
             }
             composable(Screens.AddNotePage.navRoute) {
