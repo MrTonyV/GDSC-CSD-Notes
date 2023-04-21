@@ -2,8 +2,12 @@ package com.gdscuoc.csdnotes.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +40,17 @@ fun MainNavHost(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(title = { Text(currentScreen, fontSize = 20.sp) })
+        },
+        floatingActionButton = {
+            if (currentScreen == Screens.AllNotes.name) {
+                FloatingActionButton(
+                    onClick = {
+                        navController.navigate(Screens.AddNotePage.navRoute)
+                    }
+                ) {
+                    Icon(Icons.Filled.Add, "Add Note Button")
+                }
+            }
         }
     ) { paddingValues ->
         NavHost(
@@ -44,7 +59,7 @@ fun MainNavHost(
             startDestination = Screens.AllNotes.navRoute
         ) {
             composable(Screens.AllNotes.navRoute) {
-                NotesPage(navController)
+                NotesPage()
                 currentScreen = Screens.AllNotes.name
             }
             composable(Screens.AddNotePage.navRoute) {
