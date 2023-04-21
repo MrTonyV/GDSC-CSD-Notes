@@ -15,19 +15,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.gdscuoc.csdnotes.ui.viewmodels.NotesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddNotePage(
-    navController: NavController
+    navController: NavController,
+    notesViewModel: NotesViewModel = NotesViewModel(LocalContext.current)
 ) {
-    var title by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
+    var title by rememberSaveable { mutableStateOf("") }
+    var description by rememberSaveable { mutableStateOf("") }
 
     Column(
         Modifier
@@ -51,7 +55,9 @@ fun AddNotePage(
         Spacer(Modifier.weight(1f))
         Button(modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight(), onClick = { /*TODO*/ }) {
+            .wrapContentHeight(), onClick = {
+            notesViewModel.insertNote(title, description)
+        }) {
             Text("Add Note")
         }
     }
