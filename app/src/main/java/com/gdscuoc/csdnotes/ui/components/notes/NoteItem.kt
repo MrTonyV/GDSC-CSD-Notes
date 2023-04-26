@@ -20,19 +20,5 @@ import com.gdscuoc.csdnotes.data.entities.NoteEntity
 
 @Composable
 fun NoteItem(modifier: Modifier = Modifier,noteEntity: NoteEntity) {
-    Card(
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, Color.Black)
-    ) {
-        Column(
-            modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            horizontalAlignment = Alignment.Start,
-        ) {
-            Text(noteEntity.title, fontSize = 28.sp, fontWeight = FontWeight.Bold)
-            Spacer(Modifier.height(8.dp))
-            Text(noteEntity.description)
-        }
-    }
+
 }

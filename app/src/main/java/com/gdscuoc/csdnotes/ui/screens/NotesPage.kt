@@ -30,43 +30,5 @@ import com.gdscuoc.csdnotes.ui.viewmodels.NotesViewModel
 fun NotesPage(
     notesViewModel: NotesViewModel = NotesViewModel(LocalContext.current)
 ) {
-    val notes by notesViewModel.notes.observeAsState(initial = null)
 
-    LaunchedEffect(key1 = notes) {
-        notesViewModel.getNotes()
-    }
-
-    if (notes == null) {
-        Box(Modifier.fillMaxSize()) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-    } else if (notes!!.isEmpty()) {
-        Box(
-            Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)) {
-            Text(
-                "You haven't added any notes yet...",
-                modifier = Modifier.align(Alignment.Center),
-                textAlign = TextAlign.Center,
-                lineHeight = 2.sp,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }
-    } else {
-        LazyColumn(
-            Modifier
-                .fillMaxSize(),
-            contentPadding = PaddingValues(all = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            userScrollEnabled = true
-        ) {
-            items(notes!!, key = { item: NoteEntity -> item.hashCode() }) {
-                NoteItem(modifier = Modifier.animateItemPlacement(), noteEntity = it)
-            }
-        }
-    }
 }

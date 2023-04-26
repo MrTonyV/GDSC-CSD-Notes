@@ -12,11 +12,4 @@ class NotesRepository(private val context: Context) {
         context,
         AppDatabase::class.java, "gdsc-notes-db"
     ).build()
-
-
-    suspend fun insertNote(title: String, description: String): Long {
-        return db.getNotesDao().insertNote(NoteEntity(title, description))
-    }
-
-    suspend fun getAllNotes() = db.getNotesDao().getAllNotes()
 }

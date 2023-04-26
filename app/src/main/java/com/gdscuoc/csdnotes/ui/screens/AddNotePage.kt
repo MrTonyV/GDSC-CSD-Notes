@@ -32,42 +32,5 @@ fun AddNotePage(
     navController: NavController,
     notesViewModel: NotesViewModel = NotesViewModel(LocalContext.current)
 ) {
-    val context = LocalContext.current
-    var title by rememberSaveable { mutableStateOf("") }
-    var description by rememberSaveable { mutableStateOf("") }
 
-    Column(
-        Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp, vertical = 24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text("Title") },
-            value = title, onValueChange = {
-                title = it.trim()
-            })
-        Spacer(Modifier.height(24.dp))
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = { Text("Description") },
-            value = description, onValueChange = {
-                description = it.trim()
-            })
-        Spacer(Modifier.weight(1f))
-        Button(modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(), onClick = {
-            notesViewModel.insertNote(title, description, onFailure = { errorMsg ->
-                Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show()
-            }, onSuccess = { rowId ->
-                Toast.makeText(context, "Note with id $rowId added to db!", Toast.LENGTH_LONG)
-                    .show()
-                navController.navigate(Screens.AllNotes.navRoute)
-            })
-        }) {
-            Text("Add Note")
-        }
-    }
 }
